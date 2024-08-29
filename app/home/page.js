@@ -1,4 +1,11 @@
-import { Hero, SectionOne, SectionThree, SectionTwo } from './components'
+import {
+  FooterSection,
+  Hero,
+  SectionFour,
+  SectionOne,
+  SectionThree,
+  SectionTwo,
+} from './components'
 
 export default function Home() {
   return (
@@ -6,23 +13,9 @@ export default function Home() {
       <Hero />
       <SectionOne />
       <SectionTwo />
+      <SectionFour />
       <SectionThree />
-      {/* <SectionOne /> */}
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
-      <h1>hello</h1>
+      <FooterSection />
     </>
   )
 }

@@ -7,6 +7,8 @@ export const SectionWrapper = styled.section`
   position: relative;
   margin: 10vw 0;
   z-index: ${Z_INDEX.three};
+  background-color: ${({ theme }) => `rgb(${theme.body})`};
+  padding-bottom: 1vw;
 `
 export const TextWrapper = styled.div`
   position: relative;

@@ -15,13 +15,12 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import gsap from 'gsap'
 import WordMarkIcon from './wordmark'
 import { DisplayText, NormalText } from 'styles'
-import { CustomButton } from 'components'
+import { CustomButton, CustomLink } from 'components'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const Hero = () => {
   const sectionRef = useRef()
-  const bgRef = useRef()
   const line1Ref = useRef()
   const line2Ref = useRef()
 
@@ -60,9 +59,21 @@ const Hero = () => {
         </TopLine>
         <MiddleLine>
           <LinkWrapper>
-            <NormalText>Instagram</NormalText>
-            <NormalText>Twitter (X)</NormalText>
-            <NormalText>LinkedIn</NormalText>
+            <CustomLink href="https://google.com" target="_blank">
+              INST
+            </CustomLink>
+            <CustomLink href="https://google.com" target="_blank">
+              TWTR
+            </CustomLink>
+            <CustomLink href="https://google.com" target="_blank">
+              LINK
+            </CustomLink>
+          </LinkWrapper>
+          <LinkWrapper>
+            <CustomLink>ABOUT</CustomLink>
+            <CustomLink>FEATURES</CustomLink>
+            <CustomLink>PRIVACY</CustomLink>
+            <CustomLink>SIGN UP</CustomLink>
           </LinkWrapper>
           <NormalText>Scroll for more</NormalText>
         </MiddleLine>

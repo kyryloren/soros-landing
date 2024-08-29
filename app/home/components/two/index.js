@@ -1,6 +1,12 @@
 'use client'
 
-import { Container, DisplayText, LargeText, NormalText } from 'styles'
+import {
+  Container,
+  DisplayText,
+  LargeText,
+  NormalText,
+  normalTheme,
+} from 'styles'
 import {
   ContentContainer,
   MarqueeWrapper,
@@ -55,7 +61,7 @@ const SectionTwo = () => {
   const paragraphRef = useRef([])
   const SVGRef = useRef()
 
-  const gridSize = 31 // Define the grid size (e.g., 20x20)
+  const gridSize = 21 // Define the grid size (e.g., 20x20)
   const items = Array.from({ length: gridSize * gridSize })
   const itemRefs = useRef([])
   const gridRef = useRef()
@@ -67,7 +73,7 @@ const SectionTwo = () => {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top-=100% top',
-        end: 'bottom+=5000 bottom',
+        end: 'bottom+=6000 bottom',
         scrub: 0.5,
         pin: true,
       },
@@ -75,26 +81,26 @@ const SectionTwo = () => {
 
     function introZoom() {
       let tl = gsap.timeline()
-      tl.fromTo('#List', { scale: 0 }, { scale: 2, duration: 1 }, 0)
+      tl.fromTo('#List', { scale: 0 }, { scale: 2, duration: 1 })
         .from(
           '#profile1',
           { y: -400, opacity: 0, rotate: 30, duration: 0.7 },
-          0.1,
+          0,
         )
         .from(
           '#profile2',
           { y: -500, opacity: 0, rotate: 25, duration: 0.7 },
-          0.15,
+          0,
         )
         .from(
           '#profile3',
           { y: -600, opacity: 0, rotate: 20, duration: 0.7 },
-          0.2,
+          0,
         )
         .from(
           '#profile4',
           { y: -700, opacity: 0, rotate: 15, duration: 0.7 },
-          0.25,
+          0,
         )
       return tl
     }
@@ -117,12 +123,12 @@ const SectionTwo = () => {
         { y: 0, duration: 0.7, stagger: 0.2 },
         0,
       )
-        .to('#List', { yPercent: 0, scale: 1, duration: 1 }, 0)
-        .to('#elements', { opacity: 1, duration: 0.4 }, 0.4)
+        .to('#List', { yPercent: 0, scale: 1, duration: 1 }, '<')
+        .to('#elements', { opacity: 1, duration: 0.4 }, '<0.2')
         .to(
           '#color_wrapper',
           { fill: 'rgba(255, 255, 255, 1)', duration: 0.6 },
-          0.2,
+          '<0.2',
         )
       return tl
     }
@@ -131,34 +137,60 @@ const SectionTwo = () => {
       let tl = gsap.timeline()
       const centerX = (gridSize - 1) / 2
       const centerY = (gridSize - 1) / 2
-
-      // Calculate the index of the central item
       const centerIndex = centerY * gridSize + centerX
 
-      // Animate the central item from scale 3 to scale 1
       tl.fromTo(itemRefs.current[centerIndex], { scale: 0 }, { scale: 1 }, 0)
         .fromTo(
-          gridRef.current, // Target only the central item
+          gridRef.current,
           { scale: 10 },
-          {
-            scale: 1,
-            duration: 1.5, // Adjust the duration as needed
-          },
+          { scale: 1, duration: 2 },
           '<55%',
         )
+        .to(
+          securityWrapperRef.current,
+          { backgroundColor: `rgb(${normalTheme.brand})` },
+          '<',
+        )
+        .to(
+          marqueeWrapperRef.current,
+          { color: `rgb(${normalTheme.reverseText})` },
+          '<0%',
+        )
         .fromTo(
-          itemRefs.current.filter((_, index) => index !== centerIndex), // Exclude the central item
+          itemRefs.current.filter((_, index) => index !== centerIndex),
           { scale: 0 },
           {
             scale: 1,
-            stagger: {
-              amount: 2,
-              grid: [gridSize, gridSize],
-              from: 'center',
-            },
+            duration: 1,
+            stagger: { amount: 2, grid: [gridSize, gridSize], from: 'center' },
           },
-          '<20%',
+          '<70%',
         )
+
+      return tl
+    }
+
+    function exitScene() {
+      const tl = gsap.timeline()
+
+      tl.fromTo(
+        securityWrapperRef.current,
+        {
+          scale: 1,
+          borderRadius: 0,
+          filter: 'brightness(100%) contrast(100%)',
+        },
+        {
+          scale: 0.95,
+          borderRadius: 40,
+          filter: 'brightness(50%) contrast(135%)',
+          duration: 1,
+        },
+      ).fromTo(
+        document.querySelector('.section-four'),
+        { y: '-95vh' },
+        { y: '-100vh' },
+      )
 
       return tl
     }
@@ -172,37 +204,36 @@ const SectionTwo = () => {
       .set('#elements', { opacity: 0 })
       .set(paragraphRef.current[1], { opacity: 0 })
       .from(paragraphRef.current[0], { opacity: 0, duration: 0.4 }, 0)
+      .add(introZoom(), '<')
+      .add(scollThrough(), '<80%')
       .fromTo(
         paragraphRef.current[0],
         { yPercent: 100 },
         { yPercent: -100, duration: 2 },
         0,
       )
-      .to(paragraphRef.current[0], { opacity: 0, duration: 1 }, 1)
-      .add(introZoom(), 0)
-      .add(scollThrough(), 1) // adjust to start after the text animations have begun
-      .to(paragraphRef.current[1], { opacity: 1, duration: 1 }, 1.5)
+      .to(paragraphRef.current[0], { opacity: 0, duration: 1 }, '<40%')
+      .to(paragraphRef.current[1], { opacity: 1, duration: 1 }, '<80%')
       .fromTo(
         paragraphRef.current[1],
         { yPercent: 100 },
         { yPercent: 0, duration: 2 },
-        1.5,
+        '<',
       )
-      .add(exitZoom(), 2) // synchronize the exit animation with the end of text animations
+      .add(exitZoom(), '<10%')
       .to(
         SVGRef.current,
-        { opacity: 0, yPercent: -40, xPercent: 20, duration: 0.5 },
-        3,
+        { opacity: 0, yPercent: -40, xPercent: 20, duration: 1 },
+        '>',
       )
       .to(
         paragraphRef.current[1].children,
-        { opacity: 0, yPercent: -40, xPercent: -20, duration: 0.5 },
-        3,
+        { opacity: 0, yPercent: -40, xPercent: -20, duration: 1 },
+        '<',
       )
-      .to(securityWrapperRef.current, { autoAlpha: 1 }, 3)
-      .add(animateSecurityIcons(), 4.5) // add the security icons animation at the appropriate time
+      .to(securityWrapperRef.current, { autoAlpha: 1 }, '>')
+      .add(animateSecurityIcons(), '>')
       .add(() => {
-        console.log(master.scrollTrigger.direction)
         if (master.scrollTrigger.direction === 1) {
           gsap.to(gsap.utils.toArray('#anim-text h1'), {
             scale: 1,
@@ -216,11 +247,12 @@ const SectionTwo = () => {
             duration: 0.5,
           })
         }
-      }, 4)
+      }, '<-=0.5')
+      .add(exitScene(), '<+=2.5')
   }, [])
 
   return (
-    <SectionWrapper ref={sectionRef} className="section-one">
+    <SectionWrapper ref={sectionRef} className="section-two">
       <MarqueeWrapper ref={marqueeWrapperRef}>
         <Marquee repeat={4} duration={4} id={'anim-text'}>
           <DisplayText $m={'0 2vw 0 0'}>Security built in.</DisplayText>
@@ -239,7 +271,9 @@ const SectionTwo = () => {
         <ContentContainer>
           <TextWrapper ref={(el) => paragraphRef.current.push(el)}>
             <LargeText>
-              Custom <br /> requests
+              Custom
+              <br />
+              products
             </LargeText>
             <NormalText>
               Send stores unlimited requests to customize your favorite
@@ -248,7 +282,9 @@ const SectionTwo = () => {
           </TextWrapper>
           <TextWrapper ref={(el) => paragraphRef.current.push(el)}>
             <LargeText>
-              Get matched <br /> automatically
+              Get matched
+              <br />
+              automatically
             </LargeText>
             <NormalText>
               Get accurate match ratings for your custom products using our AI.

@@ -45,7 +45,7 @@ const SectionOne = () => {
         trigger: sectionRef.current,
         start: 'top+4px top',
         end: '+=6500',
-        scrub: 1,
+        scrub: true,
         pin: true,
         onUpdate: ({ progress }) => {
           if (progress >= 0.1) {
@@ -130,7 +130,7 @@ const SectionOne = () => {
         { filter: 'brightness(50%) contrast(135%)' },
         2.5,
       )
-      .to(document.querySelector('.section-one'), { yPercent: -100 }, 2.1)
+      .to(document.querySelector('.section-two'), { yPercent: -100 }, 1.5)
   }, [])
 
   return (
@@ -154,7 +154,7 @@ const SectionOne = () => {
           your favorite stores.
         </HugeText>
         <div ref={para2Ref}>
-          <HugeText>Has all the</HugeText>
+          <HugeText>With all the</HugeText>
           <HugeText>brands you love.</HugeText>
         </div>
       </TextWrapper>

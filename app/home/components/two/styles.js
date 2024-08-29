@@ -9,6 +9,7 @@ export const SectionWrapper = styled.section`
   width: 100vw;
   height: 100vh;
   background-color: ${({ theme }) => `rgb(${theme.body})`};
+  overflow: hidden;
   z-index: ${Z_INDEX.two};
 `
 export const ContentContainer = styled.div`
@@ -64,7 +65,7 @@ export const MarqueeWrapper = styled.div`
 export const SecurityGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(${(props) => props.gridSize}, auto);
-  gap: 1vw;
+  gap: 2vw;
   justify-items: center;
   align-items: center;
   width: 100vw;

@@ -27,8 +27,8 @@ const SectionThree = () => {
     let tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        scrub: 1,
-        start: 'bottom+=20px bottom',
+        scrub: true,
+        start: 'bottom bottom',
         end: '+=1000',
         pin: true,
       },
@@ -41,7 +41,7 @@ const SectionThree = () => {
     let tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        scrub: 1,
+        scrub: true,
         start: 'top-=100% top',
         end: '+=3000',
       },
@@ -56,7 +56,7 @@ const SectionThree = () => {
   }, [])
 
   return (
-    <SectionWrapper ref={sectionRef}>
+    <SectionWrapper ref={sectionRef} className="section-three">
       <Container _height={'unset'}>
         <TextWrapper>
           <NormalText>

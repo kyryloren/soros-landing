@@ -37,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
     overscroll-behavior-y: none;
   }
 
+  .pin-spacer:nth-child(2) {
+    z-index: unset!important;
+  }
+
   .overflow {
     overflow: hidden;
     height: fit-content;

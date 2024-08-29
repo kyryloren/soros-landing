@@ -22,9 +22,11 @@ export const HeroContainer = styled(Container)`
   z-index: 2;
 `
 export const TopLine = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
+  z-index: 4;
 `
 export const DescriptionWrapper = styled.div`
   display: flex;
@@ -43,6 +45,14 @@ export const MiddleLine = styled(Container)`
   transform: translateY(-50%);
 `
 export const LinkWrapper = styled.div`
+  ${({ center }) =>
+    center &&
+    `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `}
   display: flex;
   gap: 1vw;
 `

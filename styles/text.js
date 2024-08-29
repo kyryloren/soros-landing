@@ -17,12 +17,12 @@ export const NormalText = styled.p`
   margin: ${({ $nm, $m }) => ($nm ? 0 : $m ? $m : 'unset')};
 `
 export const Medium = css`
-  font-size: 2vw;
+  // 24 > 16
+  font-size: ${pxCutOff(24)};
   font-weight: 400;
   line-height: 1.2;
-  letter-spacing: -0.1vw;
 
-  ${media.desktop`font-size: 24px;`}
+  ${media.desktop`font-size: clamp(1rem, 0.8239rem + 0.7512vw, 1.5rem);`}
 `
 export const MediumText = styled.p`
   ${Medium}
