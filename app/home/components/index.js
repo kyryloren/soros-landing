@@ -1,0 +1,6 @@
+export { default as Hero } from './hero'
+export { default as SectionOne } from './one'
+export { default as SectionTwo } from './two'
+export { default as SectionThree } from './three'
+export { default as SectionFour } from './four'
+export { default as FooterSection } from './footer'
